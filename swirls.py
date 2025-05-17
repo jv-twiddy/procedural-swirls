@@ -3,16 +3,22 @@ from pixel import *
 
 # my actual code for creating the swirls 
 radius = 200
+size = 600
+scale = 6
 
 # generate all the pixels
-pixels = [Pixel(x,y) for x in range(-100,100) for y in range(-100,100)]
+pixels = [Pixel(x*scale,y*scale) for x in range(-100,100) for y in range(-100,100)]
 
 # calculate the colour/ brightness of the pixels 
 for x in pixels:
-    val = std_dev(x.distance,50,2)*255
+    # make circles iteratively
+    val = 0
+    for y in range(0,10):
+        val += std_dev(x.distance+x.angle*10,y*20*scale/2,2)*1000 
+    
     x.colour = (val,val,val)
 
-print(pixels) 
+#print(pixels) 
 WHITE = (255, 255, 255)
 BLACK = (0, 0, 0)
 RED = (255, 0, 0)
@@ -50,12 +56,12 @@ while running:
     #screen.blit(test_surface, (x, y))
     
     for x in pixels:
-        pygame.draw.rect(screen,x.colour,(x.x+100,x.y+100,1,1))
+        pygame.draw.rect(screen,x.colour,(x.x+100*scale/2,x.y+100*scale/2,scale,scale))
     
     # flip() updates the screen to make our changes visible
     pygame.display.flip()
      
     # how many updates per second
     clock.tick(60)
- 
+
 pygame.quit()

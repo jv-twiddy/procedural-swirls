@@ -6,10 +6,20 @@ class Pixel:
         self.x = x
         self.y = y
         self.colour = None
-        self.distance = m.sqrt(x^2+y^2)
+        #print(x,y)
+        self.distance = m.sqrt((x*x)+(y*y))
+        if x == 0 and y==0:
+            angle = 0
+        elif x==0 and y>0:
+            angle = 0
+        elif x==0 and y<0:
+            angle = 0
+        else: 
+            angle = m.atan(y/x)
+        self.angle = angle
         
 # x, the value to run the equation on
 # a, the mean value 
 # s, the standard deviation
 def std_dev(x,a,s):
-    return (1/(s*m.sqrt(2*m.pi)))*m.e^(-(x-a)^2/(2*s^2))
+    return (1/(s*m.sqrt(2*m.pi)))*m.e**(-(x-a)**2/(2*s*s))
