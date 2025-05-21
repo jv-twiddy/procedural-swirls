@@ -6,17 +6,27 @@ radius = 200
 size = 600
 scale = 6
 
+circles = 10
+spacing = 20 
+a_eff = spacing*2/m.pi -m.pi
+
 # generate all the pixels
 pixels = [Pixel(x*scale,y*scale) for x in range(-100,100) for y in range(-100,100)]
 
 # calculate the colour/ brightness of the pixels 
 for x in pixels:
     # make circles iteratively
-    val = 0
-    for y in range(0,10):
-        val += std_dev(x.distance+x.angle*10,y*20*scale/2,2)*1000 
+    val1 = 0
+    val2 = 0
+    for y in range(0,circles):
+        val1 += std_dev((x.distance+x.angle*a_eff),(y*spacing*scale/2),5)*10000 
+        val2 += std_dev((x.distance+x.angle*a_eff),(y*spacing*scale/2),100)*10000 
     
-    x.colour = (val,val,val)
+    if val1 >255:
+        val1 = 255
+    if val2 > 255:
+        val2 = 255
+    x.colour = (val1,val1,val1)
 
 #print(pixels) 
 WHITE = (255, 255, 255)
