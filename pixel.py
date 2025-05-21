@@ -25,6 +25,6 @@ class Pixel:
 # x, the value to run the equation on
 # a, the mean value 
 # s, the standard deviation
-def std_dev(x,a,s):
+def std_dev(x,a,s): # there is a slight difference in that i have removed the s in 1 /s* sqrt(2pi) 
     return (1/(m.sqrt(2*m.pi)))*m.e**(-(x-a)**2/(2*s*s))
 
