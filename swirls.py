@@ -18,15 +18,19 @@ for x in pixels:
     # make circles iteratively
     val1 = 0
     val2 = 0
+    val3 = 0 
     for y in range(0,circles):
-        val1 += std_dev((x.distance+x.angle*a_eff),(y*spacing*scale/2),5)*10000 
-        val2 += std_dev((x.distance+x.angle*a_eff),(y*spacing*scale/2),100)*10000 
+        val1 += std_dev((x.distance+x.angle*a_eff),(y*spacing*scale/2),5)*1000 
+        val2 += std_dev((x.distance+x.angle*a_eff),(y*spacing*scale/2),10)*1000 
+        val3 += std_dev((x.distance+x.angle*a_eff),(y*spacing*scale/2),15)*1000
     
     if val1 >255:
         val1 = 255
     if val2 > 255:
         val2 = 255
-    x.colour = (val1,val1,val1)
+    if val3 > 255:
+        val3 = 255
+    x.colour = (val1,val2,val3)
 
 #print(pixels) 
 WHITE = (255, 255, 255)

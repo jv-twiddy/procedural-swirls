@@ -26,5 +26,5 @@ class Pixel:
 # a, the mean value 
 # s, the standard deviation
 def std_dev(x,a,s):
-    return (1/(s*m.sqrt(2*m.pi)))*m.e**(-(x-a)**2/(2*s*s))
+    return (1/(m.sqrt(2*m.pi)))*m.e**(-(x-a)**2/(2*s*s))
 
