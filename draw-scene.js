@@ -21,6 +21,9 @@ function drawScene(gl, programInfo, buffers) {
   const zFar = 100.0;
   const projectionMatrix = mat4.create();
 
+  // getting the time
+  const time = (Date.now()/2000)%10;
+
   // note: glMatrix always has the first argument
   // as the destination to receive the result.
   mat4.perspective(projectionMatrix, fieldOfView, aspect, zNear, zFar);
@@ -55,6 +58,10 @@ function drawScene(gl, programInfo, buffers) {
     false,
     modelViewMatrix,
   );
+  gl.uniform1f(
+    programInfo.uniformLocations.timeVal, // nah dawg
+    time,
+  );
 
   {
     const offset = 0;
@@ -82,6 +89,7 @@ function setPositionAttribute(gl, buffers, programInfo) {
     offset,
   );
   gl.enableVertexAttribArray(programInfo.attribLocations.vertexPosition);
+  requestAnimationFrame(drawScene);
 }
 
 export { drawScene };

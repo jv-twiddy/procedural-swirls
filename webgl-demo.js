@@ -20,8 +20,7 @@ function main() {
     return;
   }
 
-  // getting the time
-  const time = (Date.now()/2000)%10;
+  
 
   // Vertex shader program
   const vsSource = `
@@ -35,6 +34,7 @@ function main() {
   // Fragment Shader program
   const fsSource = `
     precision mediump float;
+    uniform float uTime;
     void main() {
       float y = gl_FragCoord.y/500.0 - 0.58;
       float x = gl_FragCoord.x/500.0 - 0.58;
@@ -44,7 +44,7 @@ function main() {
       float mean_fx = distance;
       // equations for the standard deviation 
       float deviation = 0.005;
-      float mean = 0.1 * float(floor(distance*7.0));
+      float mean = 0.1* float(floor(distance*uTime));
       float consta = 1.0;
       float constb = -((distance-mean)*(distance-mean))/(deviation);
       float blue = consta * pow(2.7182818,constb);
@@ -67,10 +67,9 @@ function main() {
     uniformLocations: {
       projectionMatrix: gl.getUniformLocation(shaderProgram, "uProjectionMatrix"),
       modelViewMatrix: gl.getUniformLocation(shaderProgram, "uModelViewMatrix"),
+      timeVal: gl.getUniformLocation(shaderProgram,"uTime"), // nah dawg
     },
   };
-
-
 
 
   // Here's where we call the routine that builds all the
